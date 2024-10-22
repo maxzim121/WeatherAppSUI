@@ -9,11 +9,14 @@ import SwiftUI
 
 struct LoadingView: View {
     
+    @ObservedObject var viewModel: WeatherViewModel = WeatherViewModel(
+        networkClient: NetworkClient.shared
+    )
+    
     // MARK: - Body
     
     var body: some View {
         ZStack {
-            // : Background View
             LinearGradient(
                 colors: [
                     .purple,
@@ -32,11 +35,21 @@ struct LoadingView: View {
                     .font(.title)
             }
         }
+        .alert(isPresented: $viewModel.failed) {
+            Alert(
+                title: Text("Failed to fetch weather data."),
+                message: Text("Check your connection and VPN settings."),
+                dismissButton: .default(Text("Try again")) {
+                    viewModel.tryAgainButtonTapped()
+                    viewModel.failed = false
+                }
+            )
+        }
     }
 }
 
 // MARK: - Preview
 
 #Preview {
-    LoadingView()
+    LoadingView(viewModel: WeatherViewModel(networkClient: NetworkClient.shared))
 }

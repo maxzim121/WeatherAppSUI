@@ -19,6 +19,7 @@ class WeatherViewModel: ObservableObject {
     @ObservedObject var locationManager: LocationManager = LocationManager()
     private var cancellables = Set<AnyCancellable>()
     @Published var isLoading = true
+    @Published var failed = false
     
     // MARK: - Initializer
     
@@ -69,13 +70,19 @@ extension WeatherViewModel {
             }
             switch result {
             case .success(let weather):
+                print("OK")
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.weatherData = weather
                 }
             case .failure(let error):
-                assertionFailure("\(error)")
+                print(error)
+                failed = true
             }
         }
+    }
+    
+    func tryAgainButtonTapped() {
+        observLocationChanges()
     }
 }

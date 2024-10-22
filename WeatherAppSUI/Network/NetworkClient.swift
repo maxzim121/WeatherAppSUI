@@ -25,7 +25,6 @@ final class NetworkClient {
                     completion(.success(weather))
                 case .failure(let error):
                     completion(.failure(error))
-                    assertionFailure("\(error)")
                 }
             }
         }

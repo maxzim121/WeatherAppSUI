@@ -10,8 +10,9 @@ import SwiftUI
 struct WeatherView: View {
     
     // MARK: - Properties
-    @StateObject var viewModel: WeatherViewModel
-    @State private var showingSheet = false
+    @StateObject var viewModel: WeatherViewModel = WeatherViewModel(
+        networkClient: NetworkClient.shared
+    )
     
     // MARK: - Body
     var body: some View {
