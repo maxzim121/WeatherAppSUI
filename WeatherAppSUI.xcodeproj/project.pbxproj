@@ -171,7 +171,7 @@
 				};
 			};
 			buildConfigurationList = 5A6A79152CC6660700934DF3 /* Build configuration list for PBXProject "WeatherAppSUI" */;
-			compatibilityVersion = "Xcode 15.3";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
