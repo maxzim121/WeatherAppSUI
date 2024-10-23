@@ -8,11 +8,12 @@
 import Foundation
 import CoreLocation
 
-protocol LocationManagerProtocol {
+protocol LocationManagerProtocol: AnyObject {
     var userLocation: CLLocation? { get set }
 }
 
-class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProtocol, ObservableObject {
+final class LocationManager: NSObject, ObservableObject {
+    
     private var locationManager = CLLocationManager()
     
     @Published var userLocation: CLLocation?
@@ -32,7 +33,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProto
         guard let location = locationManager.location else { return }
         userLocation = location
     }
-    
+}
+
+extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
@@ -45,3 +48,5 @@ class LocationManager: NSObject, CLLocationManagerDelegate, LocationManagerProto
         }
     }
 }
+
+extension LocationManager: LocationManagerProtocol {}
