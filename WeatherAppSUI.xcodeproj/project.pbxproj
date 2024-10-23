@@ -72,11 +72,12 @@
 				5AB989E42CC8DB5E00FE92A2 /* Preview Content */,
 				5AB989E32CC8DAD800FE92A2 /* Network */,
 				5AB989E22CC8DAC800FE92A2 /* Model */,
-				5AB989E12CC8DAA900FE92A2 /* Helpers */,
 				5AB989E02CC8DA9C00FE92A2 /* ViewModel */,
 				5AB989B52CC8D9EA00FE92A2 /* Assets.xcassets */,
 				5AB989B62CC8D9EA00FE92A2 /* Info.plist */,
 				5AB989B72CC8D9EA00FE92A2 /* WeatherAppSUIApp.swift */,
+				5AB989C72CC8DA4600FE92A2 /* WeatherIcon.swift */,
+				5AB989C62CC8DA4600FE92A2 /* LocationManager.swift */,
 			);
 			path = WeatherAppSUI;
 			sourceTree = "<group>";
@@ -87,15 +88,6 @@
 				5AB989DD2CC8DA5100FE92A2 /* WeatherViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		5AB989E12CC8DAA900FE92A2 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				5AB989C62CC8DA4600FE92A2 /* LocationManager.swift */,
-				5AB989C72CC8DA4600FE92A2 /* WeatherIcon.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		5AB989E22CC8DAC800FE92A2 /* Model */ = {
