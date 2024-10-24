@@ -9,9 +9,7 @@ import SwiftUI
 
 struct LoadingView: View {
     
-    @ObservedObject var viewModel: WeatherViewModel = WeatherViewModel(
-        networkClient: NetworkClient.shared
-    )
+    @ObservedObject var viewModel: WeatherViewModel = WeatherViewModel()
     
     // MARK: - Body
     
@@ -26,7 +24,6 @@ struct LoadingView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-            
             
             VStack(spacing: 20) {
                 ProgressView()
@@ -51,5 +48,5 @@ struct LoadingView: View {
 // MARK: - Preview
 
 #Preview {
-    LoadingView(viewModel: WeatherViewModel(networkClient: NetworkClient.shared))
+    LoadingView(viewModel: WeatherViewModel())
 }

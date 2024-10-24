@@ -6,24 +6,27 @@
 //
 
 import Foundation
+
 struct WeatherIcon {
     static func getWeatherIcon(condition: Int) -> String {
-        if (condition < 300) {
+        switch condition {
+        case 0..<300:
             return "🌩"
-        } else if (condition < 400) {
+        case 300..<400:
             return "🌧"
-        } else if (condition < 600) {
+        case 400..<600:
             return "☔️"
-        } else if (condition < 700) {
+        case 600..<700:
             return "☃️"
-        } else if (condition < 800) {
+        case 700..<800:
             return "🌫"
-        } else if (condition == 800) {
+        case 800:
             return "☀️"
-        } else if (condition <= 804) {
+        case 801...804:
             return "☁️"
-        } else {
+        default:
             return "🤷‍"
         }
     }
+
 }

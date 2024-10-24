@@ -14,7 +14,7 @@ class WeatherViewModel: ObservableObject {
     
     // MARK: - Properties
     
-    private var networkClient: NetworkClient
+    private var networkClient = NetworkClient.shared
     @Published var weatherData: WeatherResponse?
     @ObservedObject var locationManager: LocationManager = LocationManager()
     private var cancellables = Set<AnyCancellable>()
@@ -23,8 +23,7 @@ class WeatherViewModel: ObservableObject {
     
     // MARK: - Initializer
     
-    init(networkClient: NetworkClient) {
-        self.networkClient = networkClient
+    init() {
         observLocationChanges()
     }
     
@@ -60,7 +59,7 @@ extension WeatherViewModel {
         let latitude = String(userLocation.coordinate.latitude)
         let longitude = String(userLocation.coordinate.longitude)
         
-        networkClient.fetchWeather(lat: latitude, lon: longitude) { [weak self] result in
+        networkClient.fetchWeather(latitude: latitude, longitude: longitude) { [weak self] result in
             guard let self = self else {
                 DispatchQueue.main.async {
                     self?.isLoading = false
@@ -70,13 +69,11 @@ extension WeatherViewModel {
             }
             switch result {
             case .success(let weather):
-                print("OK")
                 DispatchQueue.main.async {
                     self.isLoading = false
                     self.weatherData = weather
                 }
-            case .failure(let error):
-                print(error)
+            case .failure(_):
                 failed = true
             }
         }

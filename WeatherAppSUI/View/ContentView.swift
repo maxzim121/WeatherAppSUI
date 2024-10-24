@@ -11,9 +11,7 @@ struct ContentView: View {
     
     // MARK: - Properties
     
-    @StateObject var viewModel: WeatherViewModel = WeatherViewModel(
-        networkClient: NetworkClient.shared
-    )
+    @StateObject var viewModel: WeatherViewModel = WeatherViewModel()
     
     // MARK: - Body
     var body: some View {
@@ -22,7 +20,6 @@ struct ContentView: View {
         } else {
             WeatherView(viewModel: viewModel)
         }
-        
     }
 }
 

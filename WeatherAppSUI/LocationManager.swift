@@ -12,6 +12,10 @@ protocol LocationManagerProtocol: AnyObject {
     var userLocation: CLLocation? { get set }
 }
 
+protocol CurrentLocationProtocol: AnyObject {
+    func getCurrentLocation()
+}
+
 final class LocationManager: NSObject, ObservableObject {
     
     private var locationManager = CLLocationManager()
@@ -23,30 +27,31 @@ final class LocationManager: NSObject, ObservableObject {
         setCLManagerDelegate()
     }
     
-    func setCLManagerDelegate() {
+    private func setCLManagerDelegate() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    func currentLocation() {
-        guard let location = locationManager.location else { return }
-        userLocation = location
-    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            currentLocation()
-        case .denied, .restricted:
-            locationManager.requestWhenInUseAuthorization()
-            break
+            getCurrentLocation()
         default:
+            locationManager.requestWhenInUseAuthorization()
             break
         }
     }
 }
 
 extension LocationManager: LocationManagerProtocol {}
+
+extension LocationManager: CurrentLocationProtocol {
+    func getCurrentLocation() {
+        guard let location = locationManager.location else { return }
+        userLocation = location
+    }
+}

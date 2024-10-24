@@ -10,9 +10,7 @@ import SwiftUI
 struct WeatherView: View {
     
     // MARK: - Properties
-    @StateObject var viewModel: WeatherViewModel = WeatherViewModel(
-        networkClient: NetworkClient.shared
-    )
+    @StateObject var viewModel: WeatherViewModel = WeatherViewModel()
     
     // MARK: - Body
     var body: some View {
@@ -31,7 +29,7 @@ struct WeatherView: View {
                 HStack {
                     
                     Button {
-                        viewModel.locationManager.currentLocation()
+                        viewModel.locationManager.getCurrentLocation()
                     } label: {
                         Image(systemName: "arrow.clockwise.circle.fill")
                             .font(.system(size: 30))
@@ -70,5 +68,5 @@ struct WeatherView: View {
 // MARK: - Preview
 
 #Preview {
-    WeatherView(viewModel: WeatherViewModel(networkClient: NetworkClient.shared))
+    WeatherView(viewModel: WeatherViewModel())
 }

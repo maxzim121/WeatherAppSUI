@@ -14,9 +14,9 @@ final class NetworkClient {
     private var weatherTask: URLSessionTask?
     static let shared = NetworkClient()
     
-    func fetchWeather(lat: String, lon: String, completion: @escaping WeatherCompletion) {
+    func fetchWeather(latitude: String, longitude: String, completion: @escaping WeatherCompletion) {
         assert(Thread.isMainThread)
-        let request = weatherRequest(lat: lat, lon: lon)
+        let request = weatherRequest(latitude: latitude, longitude: longitude)
         weatherTask = urlSession.object(urlSession: urlSession, for: request) { [weak self] (result: Result<WeatherResponse, Error>) in
             DispatchQueue.main.async {
                 guard self != nil else {return}
@@ -30,9 +30,9 @@ final class NetworkClient {
         }
     }
     
-    func weatherRequest(lat: String, lon: String) -> URLRequest {
+    func weatherRequest(latitude: String, longitude: String) -> URLRequest {
         URLRequest.makeHTTPRequest(
-            path: "?lat=\(lat)&lon=\(lon)&appid=d57f11ea72a6b9793fee32c98a1568a1&units=metric",
+            path: "?lat=\(latitude)&lon=\(longitude)&appid=d57f11ea72a6b9793fee32c98a1568a1&units=metric",
             httpMethod: "get"
         )
     }
